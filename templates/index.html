@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <title> Password Strength & Breach Checker</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo1.jpg') }}" type
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h3 class="mb-4 text-center">🔐 Password Strength & Breach Checker</h3>
+
+    <form method="POST" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="pwd" placeholder="Enter your password..." class="form-control" required>
+            <button class="btn btn-primary" type="submit">Check</button>
+        </div>
+    </form>
+
+    <div class="text-end mb-3">
+        <button class="btn btn-outline-secondary" onclick="suggestPassword()">Suggest me a strong password</button>
+        <div id="passwordDisplay" class="mt-2"></div>
+    </div>
+
+    {% if strength %}
+    <div class="result">
+        <h5 class="mt-4">🔎 Analysis Result:</h5>
+        <p><strong>Score:</strong> <span class="badge bg-info">{{ strength['score'] }} / 4</span></p>
+        <p><strong>Feedback:</strong> {{ strength['feedback']['warning'] or '✅ No warnings' }}</p>
+        <p><strong>Suggestions:</strong> {{ strength['feedback']['suggestions'] | join(', ') or 'None' }}</p>
+        <p><strong>Breach Check:</strong> <span class="text-danger fw-bold">{{ breach_status }}</span></p>
+        <p><strong>Common Password Check:</strong> {{ common_status }}</p>
+
+        <h6 class="mt-3">📋 Password Policy Check:</h6>
+        <pre class="{{ 'text-danger' if '❌' in policy_feedback else 'text-success' }}">{{ policy_feedback }}</pre>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    function suggestPassword() {
+        fetch('/suggest')
+            .then(response => response.text())
+            .then(password => {
+                document.getElementById('passwordDisplay').textContent = '🔐 Suggested Password: ' + password;
+            })
+            .catch(error => {
+                console.error('Error fetching password:', error);
+            });
+    }
+</script>
+
+</body>
+</html>

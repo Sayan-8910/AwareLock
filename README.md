@@ -22,3 +22,9 @@ A Flask-based web app that:
 ```bash
 pip install -r requirements.txt
 python app.py
+
+## 👨‍💻 Developed By
+
+[Sayan Mondal](https://github.com/Sayan-8910)  
+Email: sm384008@gmail.com  
+LinkedIn: www.linkedin.com/in/sayan-mondal-386a31294

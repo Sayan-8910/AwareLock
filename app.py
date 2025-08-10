@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+from flask import send_from_directory
 from zxcvbn import zxcvbn
 import hashlib
 import requests
@@ -102,6 +103,10 @@ def home():
 @app.route("/how-it-works")
 def how_it_works():
     return render_template("how_it_works.html")
+
+@app.route('/googlef24112691c94f445.html')
+def serve_google_verification():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html')
 
 # -------------------- Main Entry --------------------
 

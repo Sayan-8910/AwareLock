@@ -1,22 +1,26 @@
+/* Base styles - mobile first */
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh; /* let body grow */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f2f6fc;
     font-family: 'Segoe UI', sans-serif;
+    flex-direction: column; /* stack content vertically */
 }
 
 .container {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%; /* fills most of the screen width */
-    max-width: 1200px; /* keeps it from becoming too wide */
-    min-height: 80vh; /* stretches height */
+    width: 95%;
+    max-width: 480px;  /* narrow for phones */
+    min-height: auto;
+    box-sizing: border-box;
+    margin-bottom: 60px; /* space for footer */
 }
 
 .form-control:focus {
@@ -37,6 +41,7 @@ pre {
     padding: 15px;
     border-radius: 8px;
     font-size: 0.95rem;
+    overflow-x: auto; /* horizontal scroll if needed */
 }
 
 #passwordDisplay {
@@ -46,19 +51,67 @@ pre {
     margin-top: 10px;
 }
 
-/* Make layout adjust for smaller devices */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        width: 95%;
-    }
-}
+/* Footer fixed at bottom for small devices */
 footer {
     position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    padding: 10px 0;
+    background-color: transparent;
     text-align: center;
     font-size: 0.9rem;
     color: #555;
+    z-index: 10; /* keep footer above other content */
+}
+
+/* Tablets and small desktops */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .container {
+        max-width: 700px;
+        padding: 30px;
+        margin-bottom: 60px;
+    }
+
+    footer {
+        max-width: 700px;
+        position: fixed;
+        bottom: 10px;
+    }
+}
+
+/* Larger desktops and widescreens */
+@media (min-width: 1025px) {
+    body {
+        justify-content: flex-start;
+        align-items: center;
+        padding: 40px 0;
+        min-height: auto;
+    }
+
+    .container {
+        max-width: 900px;
+        width: 80%;
+        padding: 40px;
+        margin-bottom: 100px; /* more space below for footer */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+    }
+
+    footer {
+        position: static; /* footer in normal flow */
+        width: 100%;
+        max-width: 900px;
+        margin-top: 40px;
+        color: #777;
+        background-color: #dde2e8;
+        font-size: 1rem;
+        transform: none;
+        left: auto;
+        bottom: auto;
+        padding: 15px 0;
+        text-align: center;
+    }
 }

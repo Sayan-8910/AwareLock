@@ -7,6 +7,7 @@ import re
 import random
 import string
 import os
+import requests
 
 app = Flask(__name__)
 
@@ -106,7 +107,7 @@ def how_it_works():
 
 @app.route('/googlef24112691c94f445.html')
 def serve_google_verification():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html')
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html') 
 
 # -------------------- Main Entry --------------------
 

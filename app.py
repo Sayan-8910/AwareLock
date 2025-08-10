@@ -9,6 +9,8 @@ import os
 
 app = Flask(__name__)
 
+# -------------------- Helper Functions --------------------
+
 def check_pwned(password):
     sha1pwd = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
     prefix = sha1pwd[:5]
@@ -58,6 +60,8 @@ def generate_strong_password(length=12):
     random.shuffle(password_chars)
     return ''.join(password_chars)
 
+# -------------------- Routes --------------------
+
 @app.route("/", methods=["GET", "POST"])
 def check_password():
     if request.method == "POST":
@@ -91,7 +95,15 @@ def check_password():
 def suggest_password():
     return generate_strong_password()
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
+@app.route("/how-it-works")
+def how_it_works():
+    return render_template("how_it_works.html")
+
+# -------------------- Main Entry --------------------
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

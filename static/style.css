@@ -1,34 +1,64 @@
 body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f2f6fc;
     font-family: 'Segoe UI', sans-serif;
 }
+
 .container {
-    margin-top: 50px;
-    max-width: 700px;
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* fills most of the screen width */
+    max-width: 1200px; /* keeps it from becoming too wide */
+    min-height: 80vh; /* stretches height */
 }
+
 .form-control:focus {
     border-color: #007bff;
     box-shadow: none;
 }
+
 .result {
     margin-top: 25px;
 }
+
 .result p {
     margin-bottom: 8px;
 }
+
 pre {
     background-color: #f8f9fa;
     padding: 15px;
     border-radius: 8px;
     font-size: 0.95rem;
 }
+
 #passwordDisplay {
     font-weight: bold;
     font-size: 18px;
     color: #2c3e50;
     margin-top: 10px;
+}
+
+/* Make layout adjust for smaller devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+}
+footer {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
 }

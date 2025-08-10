@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home with How It Works</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background: #333;
+        color: white;
+        padding: 15px;
+        text-align: center;
+    }
+
+    section {
+        padding: 40px;
+        text-align: center;
+    }
+
+    #howItWorks {
+        background: #f4f4f4;
+        text-align: left;
+        max-width: 800px;
+        margin: auto;
+        border-radius: 10px;
+        padding: 30px;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    ul {
+        line-height: 1.8;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1> How it Works</h1>
+</header>
+
+
+<hr>
+
+<!-- How It Works section -->
+<section id="howItWorks">
+
+    <h3>🔧 Tools & Technologies Used</h3>
+    <ul>
+        <li><strong>Python (Flask)</strong> – Backend server for handling requests and processing password checks.</li>
+        <li><strong>HTML, CSS, JavaScript</strong> – Frontend design and interactivity.</li>
+        <li><strong>Have I Been Pwned API</strong> – Checks if your password appears in known data breaches (securely using k-Anonymity).</li>
+        <li><strong>Regex & Scoring Algorithm</strong> – Evaluates password strength based on length, complexity, and special characters.</li>
+        <li><strong>rockyou.txt Password List</strong> – Used to check if a password is common and easily guessable from leaked lists.</li>
+        <li><strong>Bootstrap</strong> – For styling and responsive design.</li>
+    </ul>
+
+
+    <h3>📜 Step-by-Step Process</h3>
+    <ol>
+        <li>You enter a password in the input field (never stored or logged).</li>
+        <li>The password is hashed locally using SHA-1 to protect privacy.</li>
+        <li>Only the first 5 characters of the hash are sent to the Have I Been Pwned API.</li>
+        <li>The API returns a list of hashes starting with those 5 characters.</li>
+        <li>The backend checks if the full hash matches any breached password.</li>
+        <li>The site shows:
+            <ul>
+                <li>Password Strength Score (Weak / Medium / Strong)</li>
+                <li>Breach status (Found in database or Safe)</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h3>💡 Why This Website is Unique</h3>
+<ul>
+    <li><strong>Privacy First</strong> – Password is never sent in full; only a partial hash is used.</li>
+    <li><strong>Dual Check</strong> – Tests both password strength and breach status in one go.</li>
+    <li><strong>Feedback</strong> – Provides feedback based on your password.</li>
+    <li><strong>Suggestions</strong> – Offers the best suggestions to improve your password.</li>
+    <li><strong>Simple & Fast</strong> – Works instantly with no account required.</li>
+    <li><strong>Educational</strong> – Teaches users how to create stronger passwords.</li>
+    <li><strong>Free to Use</strong> – No hidden fees or tracking.</li>
+    <li><strong>Best Policy Check</strong> – Validates passwords against common policies to ensure compliance with security standards.</li>
+</ul>
+
+
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('home') }}">
+            <button style="padding:10px 20px; font-size:16px;">Back to Home</button>
+        </a>
+    </div>
+</section>
+
+</body>
+</html>

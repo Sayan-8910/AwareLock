@@ -17,7 +17,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 95%;
-    max-width: none; /* Full width on mobile */
+    max-width: none;
     box-sizing: border-box;
     margin: 20px auto;
 }
@@ -39,10 +39,26 @@ button,
     font-size: 1rem;
 }
 
+/* Mobile full-width adjustments */
 @media (max-width: 480px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
+        padding: 15px;
+        box-shadow: none;
+    }
+
     .btn {
         width: 100%;
         margin-top: 8px;
+    }
+
+    footer {
+        max-width: 100%;
+        border-radius: 0;
+        margin: 10px 0 0 0;
     }
 }
 
@@ -68,7 +84,7 @@ pre {
     font-size: 18px;
     color: #2c3e50;
     margin-top: 10px;
-    word-break: break-word; /* Break long passwords */
+    word-break: break-word;
 }
 
 /* Footer */

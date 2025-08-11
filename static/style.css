@@ -17,7 +17,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 95%;
-    max-width: 480px;  /* narrow for phones */
+    max-width: 700px;  /* narrow for phones */
     min-height: auto;
     box-sizing: border-box;
     margin-bottom: 60px; /* space for footer */

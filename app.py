@@ -109,6 +109,10 @@ def how_it_works():
 def serve_google_verification():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html') 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+
 # -------------------- Main Entry --------------------
 
 if __name__ == "__main__":

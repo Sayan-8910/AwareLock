@@ -4,7 +4,7 @@
    <!-- Homepage -->
    <url>
       <loc>https://password-strength-breach-checker.onrender.com/</loc>
-      <lastmod>2025-08-10</lastmod>
+      <lastmod>2025-08-11</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
@@ -12,7 +12,7 @@
    <!-- Example additional page -->
    <url>
       <loc>https://password-strength-breach-checker.onrender.com/how-it-works</loc>
-      <lastmod>2025-08-10</lastmod>
+      <lastmod>2025-08-11</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
    </url>

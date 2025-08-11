@@ -2,25 +2,30 @@
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* let body grow */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
     background-color: #f2f6fc;
     font-family: 'Segoe UI', sans-serif;
-    flex-direction: column; /* stack content vertically */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Container */
 .container {
     background-color: #fff;
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 95%;
-    max-width: 700px;  /* narrow for phones */
-    min-height: auto;
+    max-width: none; /* Full width on mobile */
     box-sizing: border-box;
-    margin-bottom: 60px; /* space for footer */
+    margin: 20px auto;
+}
+
+/* Inputs */
+.form-control {
+    font-size: 1rem;
+    padding: 10px;
 }
 
 .form-control:focus {
@@ -28,6 +33,20 @@ body {
     box-shadow: none;
 }
 
+/* Buttons on small screens take full width */
+button,
+.btn {
+    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+/* Result section */
 .result {
     margin-top: 25px;
 }
@@ -41,7 +60,7 @@ pre {
     padding: 15px;
     border-radius: 8px;
     font-size: 0.95rem;
-    overflow-x: auto; /* horizontal scroll if needed */
+    overflow-x: auto;
 }
 
 #passwordDisplay {
@@ -49,22 +68,17 @@ pre {
     font-size: 18px;
     color: #2c3e50;
     margin-top: 10px;
+    word-break: break-word; /* Break long passwords */
 }
 
-/* Footer fixed at bottom for small devices */
+/* Footer */
 footer {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
     max-width: 480px;
-    padding: 10px 0;
-    background-color: transparent;
+    margin: 20px auto 10px;
     text-align: center;
     font-size: 0.9rem;
     color: #555;
-    z-index: 10; /* keep footer above other content */
 }
 
 /* Tablets and small desktops */
@@ -72,13 +86,9 @@ footer {
     .container {
         max-width: 700px;
         padding: 30px;
-        margin-bottom: 60px;
     }
-
     footer {
         max-width: 700px;
-        position: fixed;
-        bottom: 10px;
     }
 }
 
@@ -86,32 +96,25 @@ footer {
 @media (min-width: 1025px) {
     body {
         justify-content: flex-start;
-        align-items: center;
         padding: 40px 0;
-        min-height: auto;
     }
 
     .container {
         max-width: 900px;
         width: 80%;
         padding: 40px;
-        margin-bottom: 100px; /* more space below for footer */
+        margin-bottom: 40px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         border-radius: 16px;
     }
 
     footer {
-        position: static; /* footer in normal flow */
         width: 100%;
         max-width: 900px;
         margin-top: 40px;
         color: #777;
         background-color: #dde2e8;
         font-size: 1rem;
-        transform: none;
-        left: auto;
-        bottom: auto;
         padding: 15px 0;
-        text-align: center;
     }
 }

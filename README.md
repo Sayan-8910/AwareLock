@@ -44,14 +44,6 @@ Or check the hosted version here:
 👉 password-strength-breach-checker.onrender.com
 
 📸 Screenshots
-![Google search](assets/s0.png)  
-![Home Page](assets/s1.png)  
-![Home Page](assets/s2.png)  
-![Home Page](assets/s3.png)  
-![Home Page](assets/s4.png)  
-![Home Page](assets/s5.png)  
-![How it works](assets/s7.png)  
-
 
 
 👨‍💻 Developed By

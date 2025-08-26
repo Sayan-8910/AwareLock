@@ -1,136 +1,140 @@
-/* Base styles - mobile first */
+/* ========= GLOBAL ========= */
 body {
+    background: linear-gradient(135deg, #f9fbfc, #eef2f7);
+    font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    background-color: #f2f6fc;
-    font-family: 'Segoe UI', sans-serif;
+    color: #212529;
+}
+
+/* ========= HEADER ========= */
+header {
+    background: #0d6efd;
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+header h1 {
+    font-size: 2.1rem;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+/* ========= FORM ========= */
+form .input-group {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
-
-/* Container */
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 95%;
-    max-width: none;
-    box-sizing: border-box;
-    margin: 20px auto;
-}
-
-/* Inputs */
-.form-control {
-    font-size: 1rem;
+form .input-group input {
+    border-radius: 8px 0 0 8px;
+    border: 1px solid #ced4da;
     padding: 10px;
-}
-
-.form-control:focus {
-    border-color: #007bff;
-    box-shadow: none;
-}
-
-/* Buttons on small screens take full width */
-button,
-.btn {
     font-size: 1rem;
 }
-
-/* Mobile full-width adjustments */
-@media (max-width: 480px) {
-    .container {
-        width: 100%;
-        max-width: 100%;
-        border-radius: 0;
-        margin: 0;
-        padding: 15px;
-        box-shadow: none;
-    }
-
-    .btn {
-        width: 100%;
-        margin-top: 8px;
-    }
-
-    footer {
-        max-width: 100%;
-        border-radius: 0;
-        margin: 10px 0 0 0;
-    }
+form .input-group input:focus {
+    box-shadow: 0 0 10px rgba(13,110,253,0.3);
+    outline: none;
+    border-color: #0d6efd;
+}
+form .input-group button {
+    border-radius: 0 8px 8px 0;
+    padding: 10px 18px;
+    font-size: 1rem;
+    border: none;
+    background: #0d6efd;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+form .input-group button:hover {
+    background: #0b5ed7;
 }
 
-/* Result section */
+/* ========= RESULT BOX ========= */
 .result {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     margin-top: 25px;
 }
-
-.result p {
-    margin-bottom: 8px;
+.result h5 {
+    color: #0d6efd;
+    margin-bottom: 12px;
 }
-
 pre {
-    background-color: #f8f9fa;
-    padding: 15px;
+    background: #f8f9fa;
+    padding: 12px;
     border-radius: 8px;
     font-size: 0.95rem;
-    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    border: 1px solid #e2e6ea;
 }
 
-#passwordDisplay {
-    font-weight: bold;
-    font-size: 18px;
-    color: #2c3e50;
-    margin-top: 10px;
-    word-break: break-word;
+/* ========= SUGGEST PASSWORD ========= */
+.suggest-btn {
+    padding: 8px 18px;
+    font-size: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #ced4da;
+    background: white;
+    color: #0d6efd;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+.suggest-btn:hover {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
+.password-box {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-family: "Courier New", monospace;
+    font-size: 15px;
+    color: #212529;
+    word-break: break-all;
 }
 
-/* Footer */
+/* ========= FOOTER ========= */
 footer {
-    width: 100%;
-    max-width: 480px;
-    margin: 20px auto 10px;
     text-align: center;
     font-size: 0.9rem;
-    color: #555;
+    color: #6c757d;
+    margin-top: 40px;
+    padding: 15px 0;
+}
+footer a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+footer a:hover {
+    text-decoration: underline;
 }
 
-/* Tablets and small desktops */
-@media (min-width: 481px) and (max-width: 1024px) {
-    .container {
-        max-width: 700px;
-        padding: 30px;
+/* ========= RESPONSIVE ========= */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
     }
-    footer {
-        max-width: 700px;
+    .result {
+        padding: 15px;
     }
-}
-
-/* Larger desktops and widescreens */
-@media (min-width: 1025px) {
-    body {
-        justify-content: flex-start;
-        padding: 40px 0;
+    form .input-group {
+        flex-direction: column;
+        gap: 10px;
     }
-
-    .container {
-        max-width: 900px;
-        width: 80%;
-        padding: 40px;
-        margin-bottom: 40px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        border-radius: 16px;
-    }
-
-    footer {
+    form .input-group input,
+    form .input-group button {
         width: 100%;
-        max-width: 900px;
-        margin-top: 40px;
-        color: #777;
-        background-color: #dde2e8;
-        font-size: 1rem;
-        padding: 15px 0;
+        border-radius: 8px !important;
     }
 }

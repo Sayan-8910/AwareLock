@@ -3,99 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home with How It Works</title>
+<title>Password Checker - How It Works</title>
 <style>
     body {
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
+        background: #f8fafc;
+        color: #333;
     }
 
     header {
-        background: #333;
+        background: #0d6efd;
         color: white;
-        padding: 15px;
+        padding: 20px;
         text-align: center;
     }
 
     section {
-        padding: 40px;
+        padding: 40px 20px;
         text-align: center;
     }
 
     #howItWorks {
-        background: #f4f4f4;
+        background: #ffffff;
         text-align: left;
-        max-width: 800px;
+        max-width: 850px;
         margin: auto;
-        border-radius: 10px;
+        border-radius: 12px;
         padding: 30px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
-    h2 {
+    h2, h3 {
         text-align: center;
+        color: #0d6efd;
     }
 
-    ul {
+    ul, ol {
         line-height: 1.8;
     }
+
+    .back-btn {
+        padding: 12px 28px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #2563eb, #1e40af);
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background: linear-gradient(135deg, #1e40af, #1d4ed8);
+    }
+
 </style>
 </head>
 <body>
 
 <header>
-    <h1> How it Works</h1>
+    <h1>🔐 How This Password Checker Works</h1>
 </header>
 
-
-<hr>
-
-<!-- How It Works section -->
 <section id="howItWorks">
 
-    <h3>🔧 Tools & Technologies Used</h3>
+    <h3>🚀 What This Project Does</h3>
+    <p>This website helps you check if your password is <strong>strong</strong> and whether it has ever been <strong>leaked</strong> in a data breach. 
+    It gives you instant feedback and tips to create a safer password.</p>
+
+    <h3>🛠 Tools Used (In Simple Words)</h3>
     <ul>
-        <li><strong>Python (Flask)</strong> – Backend server for handling requests and processing password checks.</li>
-        <li><strong>HTML, CSS, JavaScript</strong> – Frontend design and interactivity.</li>
-        <li><strong>Have I Been Pwned API</strong> – Checks if your password appears in known data breaches (securely using k-Anonymity).</li>
-        <li><strong>Regex & Scoring Algorithm</strong> – Evaluates password strength based on length, complexity, and special characters.</li>
-        <li><strong>rockyou.txt Password List</strong> – Used to check if a password is common and easily guessable from leaked lists.</li>
-        <li><strong>Bootstrap</strong> – For styling and responsive design.</li>
+        <li><strong>Frontend (What you see)</strong> → Made with HTML, CSS, and JavaScript.</li>
+        <li><strong>Backend (The brain)</strong> → Built with Python (Flask).</li>
+        <li><strong>Have I Been Pwned</strong> → A trusted website that checks if passwords were leaked online.</li>
+        <li><strong>Password Rules</strong> → The system checks if your password is long, complex, and not too common.</li>
+        <li><strong>rockyou.txt</strong> → A famous leaked password list used to spot weak/common passwords.</li>
+        <li><strong>Bootstrap</strong> → Helps make the site look clean and responsive.</li>
     </ul>
 
-
-    <h3>📜 Step-by-Step Process</h3>
+    <h3>📖 Step-by-Step: What Happens When You Enter a Password</h3>
     <ol>
-        <li>You enter a password in the input field (never stored or logged).</li>
-        <li>The password is hashed locally using SHA-1 to protect privacy.</li>
-        <li>Only the first 5 characters of the hash are sent to the Have I Been Pwned API.</li>
-        <li>The API returns a list of hashes starting with those 5 characters.</li>
-        <li>The backend checks if the full hash matches any breached password.</li>
-        <li>The site shows:
-            <ul>
-                <li>Password Strength Score (Weak / Medium / Strong)</li>
-                <li>Breach status (Found in database or Safe)</li>
-            </ul>
-        </li>
+        <li>You type a password (don’t worry, it’s never stored).</li>
+        <li>It gets converted into a code (hash) on your device for privacy.</li>
+        <li>Only a small piece of this code is sent to check against leaked passwords online.</li>
+        <li>The site then tells you if your password is <strong>Safe</strong> or <strong>Leaked</strong>.</li>
+        <li>It also gives a <strong>Strength Score</strong> → Weak, Fair, Good, or Strong.</li>
+        <li>Finally, it shows <strong>tips & suggestions</strong> to make it stronger.</li>
     </ol>
 
-    <h3>💡 Why This Website is Unique</h3>
-<ul>
-    <li><strong>Privacy First</strong> – Password is never sent in full; only a partial hash is used.</li>
-    <li><strong>Dual Check</strong> – Tests both password strength and breach status in one go.</li>
-    <li><strong>Feedback</strong> – Provides feedback based on your password.</li>
-    <li><strong>Suggestions</strong> – Offers the best suggestions to improve your password.</li>
-    <li><strong>Simple & Fast</strong> – Works instantly with no account required.</li>
-    <li><strong>Educational</strong> – Teaches users how to create stronger passwords.</li>
-    <li><strong>Free to Use</strong> – No hidden fees or tracking.</li>
-    <li><strong>Best Policy Check</strong> – Validates passwords against common policies to ensure compliance with security standards.</li>
-</ul>
+    <h3>✨ Why This Project is Special</h3>
+    <ul>
+        <li><strong>Safe & Private</strong> → Your password is never fully shared.</li>
+        <li><strong>Two-in-One</strong> → Checks both strength and breach status.</li>
+        <li><strong>Helpful Feedback</strong> → Tells you exactly how to improve.</li>
+        <li><strong>Instant Suggestions</strong> → Recommends strong password ideas.</li>
+        <li><strong>Easy to Use</strong> → No signup or setup required.</li>
+        <li><strong>Educational</strong> → You learn how to make better passwords.</li>
+    </ul>
 
-
-
-    <div style="text-align:center; margin-top:20px;">
+    <div style="text-align:center; margin-top:30px;">
         <a href="{{ url_for('home') }}">
-            <button style="padding:10px 20px; font-size:16px;">Back to Home</button>
+            <button class="back-btn">⬅ Back to Home</button>
         </a>
     </div>
 </section>

@@ -19,22 +19,31 @@
 <header>
     <h1 class="mb-4 text-center">🔐 Password Strength & Breach Checker</h1>
 </header>
+
 <div class="container my-4">
-   
 
-
+    <!-- Password Input Form -->
     <form method="POST" class="mb-3">
         <div class="input-group">
-            <input type="text" name="pwd" placeholder="Enter your password..." class="form-control" required>
+            <input type="text" id="passwordInput" name="pwd" placeholder="Enter your password..." class="form-control" required>
             <button class="btn btn-primary" type="submit">Check</button>
         </div>
     </form>
 
-    <div class="text-end mb-3">
-        <button class="btn btn-outline-secondary w-100 w-sm-auto" onclick="suggestPassword()">Suggest me a strong password</button>
-        <div id="passwordDisplay" class="mt-2 text-break"></div>
+    <!-- Live Strength Meter -->
+    <div class="progress mt-2" style="height: 20px;">
+        <div id="strengthBar" class="progress-bar bg-danger" role="progressbar" style="width: 0%">Weak</div>
     </div>
 
+    <!-- Suggest Password -->
+    <div class="text-end mb-3 mt-3">
+        <button class="btn btn-outline-secondary suggest-btn" onclick="suggestPassword()">
+            Suggest me a strong password →
+        </button>
+        <div id="passwordDisplay" class="password-box mt-2 text-break"></div>
+    </div>
+
+    <!-- Server-side Result Section -->
     {% if strength %}
     <div class="result">
         <h5 class="mt-4">🔎 Analysis Result:</h5>
@@ -48,25 +57,12 @@
         <pre class="{{ 'text-danger' if '❌' in policy_feedback else 'text-success' }}">{{ policy_feedback }}</pre>
     </div>
     {% endif %}
-
-    
 </div>
 
-<script>
-    function suggestPassword() {
-        fetch('/suggest')
-            .then(response => response.text())
-            .then(password => {
-                document.getElementById('passwordDisplay').textContent = '🔐 Suggested Password: ' + password;
-            })
-            .catch(error => {
-                console.error('Error fetching password:', error);
-            });
-    }
-</script>
-<div class="mt-3">
-        <a href="{{ url_for('how_it_works') }}" class="btn btn-link p-0">How It Works</a>
-    </div>
+<!-- Footer -->
+<div class="mt-3 text-center">
+    <a href="{{ url_for('how_it_works') }}" class="btn btn-link p-0">How It Works</a>
+</div>
 
 <hr class="mt-5">
 <footer class="text-center mb-3" style="font-size: 0.9rem; color: #555;">
@@ -76,8 +72,58 @@
     <a href="https://www.linkedin.com/in/sayan-mondal-386a31294" target="_blank">LinkedIn</a>
 </footer>
 
-<!-- Bootstrap JS (optional) -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script>
+    // Suggest Password
+    function suggestPassword() {
+        fetch('/suggest')
+            .then(response => response.text())
+            .then(password => {
+                document.getElementById('passwordDisplay').textContent = password;
+            })
+            .catch(error => {
+                console.error('Error fetching password:', error);
+            });
+    }
+
+    // Live Password Strength Checker
+    const passwordInput = document.getElementById("passwordInput");
+    const strengthBar = document.getElementById("strengthBar");
+
+    passwordInput.addEventListener("input", function() {
+        const val = passwordInput.value;
+        let strength = 0;
+
+        if (val.length >= 8) strength++;
+        if (/[A-Z]/.test(val)) strength++;
+        if (/[0-9]/.test(val)) strength++;
+        if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+        let percentage = (strength / 4) * 100;
+
+        strengthBar.style.width = percentage + "%";
+
+        if (strength === 0) {
+            strengthBar.textContent = "Weak";
+            strengthBar.className = "progress-bar bg-danger";
+        } else if (strength === 1) {
+            strengthBar.textContent = "Weak";
+            strengthBar.className = "progress-bar bg-danger";
+        } else if (strength === 2) {
+            strengthBar.textContent = "Fair";
+            strengthBar.className = "progress-bar bg-warning";
+        } else if (strength === 3) {
+            strengthBar.textContent = "Good";
+            strengthBar.className = "progress-bar bg-info";
+        } else if (strength === 4) {
+            strengthBar.textContent = "Strong";
+            strengthBar.className = "progress-bar bg-success";
+        }
+    });
+</script>
 
 </body>
 </html>

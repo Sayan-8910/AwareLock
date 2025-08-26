@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Strength & Breach Checker</title>
+    <title> Strength & Breach Checker</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='logo1.jpg') }}" type="image/jpeg">
@@ -23,12 +23,22 @@
 <div class="container my-4">
 
     <!-- Password Input Form -->
-    <form method="POST" class="mb-3">
-        <div class="input-group">
-            <input type="text" id="passwordInput" name="pwd" placeholder="Enter your password..." class="form-control" required>
-            <button class="btn btn-primary" type="submit">Check</button>
-        </div>
-    </form>
+  <form method="POST" class="mb-3">
+  <div class="row g-2">
+    <div class="col-12 col-sm-9">
+      <input 
+        type="text" 
+        id="passwordInput" 
+        name="pwd" 
+        placeholder="Enter your password..." 
+        class="form-control" 
+        required>
+    </div>
+    <div class="col-12 col-sm-3">
+      <button class="btn btn-primary w-100" type="submit">Check</button>
+    </div>
+  </div>
+</form>
 
     <!-- Live Strength Meter -->
     <div class="progress mt-2" style="height: 20px;">

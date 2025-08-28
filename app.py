@@ -72,6 +72,12 @@ def check_password():
         breach_status = check_pwned(pwd)
         common_status = check_common_password(pwd)
 
+        # Extract entropy & crack-time details
+        guesses = strength["guesses"]
+        crack_times_display = strength["crack_times_display"]
+        crack_times_seconds = strength["crack_times_seconds"]
+
+        # Apply policy checks
         policy_results = validate_password_policy(pwd)
         feedback_lines = []
         for rule, passed in policy_results.items():
@@ -89,9 +95,13 @@ def check_password():
             breach_status=breach_status,
             common_status=common_status,
             policy_feedback=policy_feedback,
-            suggested_password=suggested_password
+            suggested_password=suggested_password,
+            guesses=guesses,
+            crack_times_display=crack_times_display,
+            crack_times_seconds=crack_times_seconds
         )
     return render_template("index.html")
+
 
 @app.route("/suggest")
 def suggest_password():

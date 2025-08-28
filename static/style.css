@@ -56,11 +56,12 @@ form .input-group button:hover {
 
 /* ========= RESULT BOX ========= */
 .result {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    margin-top: 25px;
+   border: 2px solid #4a90e2;   /* Blue border */
+  border-radius: 10px;         /* Rounded corners */
+  padding: 20px;               /* Space inside */
+  margin: 15px 0;              /* Space outside */
+  background: #ffffff;            /* White background */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow */
 }
 .result h5 {
     color: #0d6efd;

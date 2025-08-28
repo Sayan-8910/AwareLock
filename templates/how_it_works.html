@@ -27,6 +27,8 @@
 
     #howItWorks {
         background: #ffffff;
+        border: 2px solid #4a90e2;  
+        border-radius: 10px;   
         text-align: left;
         max-width: 850px;
         margin: auto;
@@ -75,15 +77,23 @@
     <p>This website helps you check if your password is <strong>strong</strong> and whether it has ever been <strong>leaked</strong> in a data breach. 
     It gives you instant feedback and tips to create a safer password.</p>
 
-    <h3>🛠 Tools Used (In Simple Words)</h3>
-    <ul>
-        <li><strong>Frontend (What you see)</strong> → Made with HTML, CSS, and JavaScript.</li>
-        <li><strong>Backend (The brain)</strong> → Built with Python (Flask).</li>
-        <li><strong>Have I Been Pwned</strong> → A trusted website that checks if passwords were leaked online.</li>
-        <li><strong>Password Rules</strong> → The system checks if your password is long, complex, and not too common.</li>
-        <li><strong>rockyou.txt</strong> → A famous leaked password list used to spot weak/common passwords.</li>
-        <li><strong>Bootstrap</strong> → Helps make the site look clean and responsive.</li>
-    </ul>
+   <h3>🛠 Tools & Technologies Used (In Simple Words)</h3>
+<ul>
+    <li><strong>Frontend (What you see)</strong> → Made with HTML, CSS, and JavaScript.</li>
+    <li><strong>Backend (The brain)</strong> → Built with Python (Flask).</li>
+    <li><strong>Have I Been Pwned</strong> → A trusted website that checks if passwords were leaked online.</li>
+    <li><strong>Password Rules</strong> → The system checks if your password is long, complex, and not too common.</li>
+    <li><strong>rockyou.txt</strong> → A famous leaked password list used to spot weak/common passwords.</li>
+    <li><strong>zxcvbn (by Dropbox)</strong> → A smart password strength checker that estimates how long it would take hackers to crack your password.</li>
+    <li><strong>Bootstrap</strong> → Helps make the site look clean and responsive.</li>
+</ul>
+
+        <h3>⏳ Password Crack Time (How Fast Hackers Could Guess)</h3>
+            <ul>
+                <li><strong>Offline Hashing</strong> 🔒 → If a website stores your password securely, this shows how long it might take to crack it after a database leak.</li>
+                <li><strong>Online Throttling</strong> 🌐 → If someone tries guessing directly on a login page (with protections like limits), this shows how long it would take.</li>
+            </ul>
+
 
     <h3>📖 Step-by-Step: What Happens When You Enter a Password</h3>
     <ol>

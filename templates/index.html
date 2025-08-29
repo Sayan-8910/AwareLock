@@ -39,7 +39,7 @@
         name="pwd" 
         placeholder="Enter your password..." 
         class="form-control" 
-        maxlength="20" 
+        maxlength="25" 
         required>
     </div>
     <div class="col-12 col-sm-3">
@@ -122,10 +122,10 @@
         const val = passwordInput.value;
         let strength = 0;
 
-        if (val.length >= 8 && val.length <= 20) strength++;
+        if (val.length >= 8 && val.length <= 25) strength++;
         if (/[a-z]/.test(val) && /[A-Z]/.test(val)) strength++;
         if (/[0-9]/.test(val)) strength++;
-        if ((val.match(/[^A-Za-z0-9]/g) || []).length >= 2 && val.length >= 11) strength++;
+        if ((val.match(/[^A-Za-z0-9]/g) || []).length >= 3 && val.length >= 12) strength++;
 
 
         let percentage = (strength / 4) * 100;

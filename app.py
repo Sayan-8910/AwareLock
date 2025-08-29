@@ -45,22 +45,25 @@ def validate_password_policy(password):
         "Include at least 2 uppercase letters.": len(re.findall(r'[A-Z]', password)) >= 2,
         "Include at least 2 lowercase letters.": len(re.findall(r'[a-z]', password)) >= 2,
         "Include at least 2 digits.": len(re.findall(r'\d', password)) >= 2,
-        "Include at least 2 special characters.": len(re.findall(r'[!@#$%^&*(),.?\":{}|<>]', password)) >= 2,
-        "Include at least 2 operators (+ - * / =).": len(re.findall(r'[+\-*/=]', password)) >= 2
+        "Include at least 3 special characters.": len(re.findall(r'[!@#$%^&*(),.?+-/\":{}|<>]', password)) >= 3,
     }
 
-def generate_strong_password(length=12):
-    if length < 10:
-        length = 12
-    uppercase = random.choices(string.ascii_uppercase, k=2)
-    lowercase = random.choices(string.ascii_lowercase, k=2)
-    digits = random.choices(string.digits, k=2)
-    specials = random.choices('!@#$%^&*(),.?":{}|<>', k=2)
-    operators = random.choices('+-*/=', k=2)
-    remaining = random.choices(string.ascii_letters + string.digits + '!@#$%^&*()+-*/=', k=length - 10)
-    password_chars = uppercase + lowercase + digits + specials + operators + remaining
-    random.shuffle(password_chars)
-    return ''.join(password_chars)
+def generate_strong_password():
+    # Word lists for phrase
+    adjectives = ["Blue", "Smart", "Fast", "Silent", "Happy", "Brave", "Clever", "Mighty", "Fierce", "Crazy"]
+    nouns = ["Tiger", "Panda", "Dragon", "Eagle", "Shark", "Lion", "Wolf", "Falcon", "Bear", "Cheetah"]
+    verbs = ["Runs", "Jumps", "Flies", "Climbs", "Fights", "Wins", "Rises", "Roars", "Dances", "Shines"]
+
+    # Generate phrase
+    phrase = random.choice(adjectives) + random.choice(nouns) + random.choice(verbs)
+
+    # Add requirements
+    digits = "".join(random.choices("0123456789", k=2))
+    specials = "".join(random.sample("!@#$%^&*+-/", 3))
+
+    # Final password (no extra randomness)
+    password = phrase + digits + specials 
+    return password
 
 # -------------------- Routes --------------------
 

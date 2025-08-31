@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Test Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='phishing.css') }}">
+</head>
+<body>
+    <div class="warning-box">
+        <h2>⚠️ Phishing Simulation</h2>
+        <p>Hello <b>{{ username }}</b>, you just entered your password on a <span class="fake-text">FAKE</span> page.</p>
+        <p>In real life, hackers could have stolen it! </p>
+        <p> So always follow this tips:↓ </p>
+
+        <ul class="tips-list">
+            <li>✅ Always check the website URL</li>
+            <li>✅ Ensure the site uses <strong class="https-text">HTTPS 🔒</strong></li>
+            <li>✅ Use strong & unique passwords</li>
+            <li>✅ Enable Two-Factor Authentication (2FA)</li>
+            <li>✅ Don’t reuse the same password on multiple sites</li>
+            <li>✅ Avoid clicking on suspicious links or emails</li>
+        </ul>
+
+        <a href="/" class="home-btn">⬅ Back to Home</a>
+    </div>
+</body>
+</html>

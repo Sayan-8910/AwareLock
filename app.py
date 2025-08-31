@@ -114,6 +114,18 @@ def suggest_password():
 def home():
     return render_template('index.html')
 
+# 🔐 Fake phishing page
+@app.route("/phishing")
+def phishing():
+    return render_template("phishing.html")
+
+# 🔐 Handle fake login attempt
+@app.route("/phishing_test", methods=["POST"])
+def phishing_test():
+    username = request.form.get("username")
+    # ⚠️ We never save the password, just simulate
+    return render_template("phishing_result.html", username=username)
+
 @app.route("/how-it-works")
 def how_it_works():
     return render_template("how_it_works.html")

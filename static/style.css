@@ -56,12 +56,12 @@ form .input-group button:hover {
 
 /* ========= RESULT BOX ========= */
 .result {
-   border: 2px solid #4a90e2;   /* Blue border */
-  border-radius: 10px;         /* Rounded corners */
-  padding: 20px;               /* Space inside */
-  margin: 15px 0;              /* Space outside */
-  background: #ffffff;            /* White background */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow */
+   border: 2px solid #4a90e2;  
+  border-radius: 10px;         
+  padding: 20px;               
+  margin: 15px 0;              
+  background: #ffffff;            
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
 }
 .result h5 {
     color: #0d6efd;
@@ -104,6 +104,70 @@ pre {
     color: #212529;
     word-break: break-all;
 }
+/* Container to hold phishing demo + eye icon */
+.phishing-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;  /* keeps it aligned right */
+    margin-top: 10px;
+}
+
+/* Phishing demo button */
+.d-btn {
+    font-size: 15px;
+    text-decoration: none;
+    background: white;
+    padding: 8px 18px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-weight: 500;
+    color: #0d6efd;
+    transition: 0.3s;
+    margin-right: 8px;  /* space before info icon */
+}
+.d-btn:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+/* Info icon + tooltip */
+.info-icon {
+    position: relative;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+    transition: 0.3s;
+}
+.info-icon:hover {
+    color: #000000;
+}
+
+/* Tooltip */
+.tooltip {
+    visibility: hidden;
+    opacity: 0;
+    width: 220px;
+    background: #fff;
+    color: #333;
+    text-align: left;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    line-height: 1.4;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.info-icon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
 
 /* ========= FOOTER ========= */
 footer {

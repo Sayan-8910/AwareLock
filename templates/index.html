@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Open Graph for social preview -->
-    <meta property="og:title" content="Password Strength & Breach Checker">
-    <meta property="og:description" content="Check your password strength and see if it has been leaked online.">
-    <meta property="og:image" content="https://password-strength-breach-checker.onrender.com/static/logo1.jpg">
-    <meta property="og:url" content="https://password-strength-breach-checker.onrender.com">
-    <meta name="twitter:card" content="summary_large_image">
+    <!-- Open Graph Meta Tags -->
+<meta property="og:title" content="AwareLock -  Password & Phishing Awareness">
+<meta property="og:description" content="AwareLock is a cyber awareness and training platform that teaches password safety & phishing detection. Unlock awareness. Lock out threats.">
+<meta property="og:image" content="https://password-strength-breach-checker.onrender.com/static/logo1.png">
+<meta property="og:url" content="https://password-strength-breach-checker.onrender.com">
 
-    <title> Strength & Breach Checker</title>
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AwareLock - Phishing & Password Awareness">
+<meta name="twitter:description" content="Train smart with AwareLock. Learn to detect phishing attempts and strengthen your passwords.">
+<meta name="twitter:image" content="https://password-strength-breach-checker.onrender.com/static/logo1.png">
+
+
+    <title> AwareLock </title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='logo1.jpg') }}" type="image/jpeg">
@@ -24,7 +31,8 @@
 <body>
 
 <header>
-    <h1 class="mb-4 text-center">🔐 Password Strength & Breach Checker</h1>
+    <h1 class="mb-4 text-center">🔐 AwareLock</h1>
+    <h3 class="mb-3 text-center"> Password & Phishing Awareness</h3>
 </header>
 
 <div class="container my-4">
@@ -61,6 +69,18 @@
         </button>
         <div id="passwordDisplay" class="password-box mt-2 text-break"></div>
     </div>
+  <div class="phishing-section">
+    <a href="/phishing" class="d-btn"> Try Phishing Demo here</a>
+    
+    <!-- Info button -->
+    <span class="info-icon">
+         <img src="{{ url_for('static', filename='ll.png') }}" alt="Phishing Icon" width="25" height="25">
+        <span class="tooltip">
+            🛡 <b>Cybersecurity Awareness</b> <br>
+            Want to see how phishing works? Try our safe <b>Phishing Simulation Demo</b>.
+        </span>
+    </span>
+</div>
 
     <!-- Server-side Result Section -->
     {% if strength %}

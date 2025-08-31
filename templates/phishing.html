@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Login Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='phishing.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <img src="{{ url_for('static', filename='ll.png') }}" 
+             alt="Phishing Icon" 
+             style="position:absolute; top:19%; left:50%; transform:translate(-50%,-50%); opacity:0.2; width:100px; height:100px; z-index:0;">
+        <h2 style="position:relative; z-index:1;">Login</h2>
+       <form action="/phishing_test" method="POST">
+            <input type="text" name="username" placeholder="Username/Email" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

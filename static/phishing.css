@@ -7,6 +7,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 10px; /* extra padding for small screens */
 }
 
 /* ---------- Login Page (phishing.html) ---------- */
@@ -18,9 +19,6 @@ body {
     background: rgba(248, 249, 248, 0.9); /* semi-transparent white */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Watermark logo behind content */
-
 
 /* Make sure form elements stay above logo */
 .login-box * {
@@ -122,4 +120,42 @@ button:hover {
 @keyframes pop-in {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+}
+
+/* ---------- Responsive Styles ---------- */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* stack vertically */
+        height: auto; /* allow page to scroll */
+    }
+
+    .login-box {
+        width: 100%; /* full width on small screens */
+        padding: 20px;
+    }
+
+    input {
+        width: 100%; /* inputs span full width */
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .warning-box {
+        max-width: 100%; /* make warning box fluid */
+        padding: 20px;
+    }
+
+    .tips-list li {
+        font-size: 14px; /* slightly smaller for mobiles */
+        padding: 8px 12px;
+    }
+
+    .home-btn {
+        width: 100%;
+        text-align: center;
+    }
 }

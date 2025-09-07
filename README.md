@@ -1,37 +1,53 @@
-# 🔐 Password Strength & Breach Checker  
+# 🔐 AwareLock
 
-[![Live Demo](https://img.shields.io/badge/🌍%20Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://password-strength-breach-checker.onrender.com)  
-
-A **Flask-based Web App** that helps users create secure passwords by:  
-
-- ✅ Checking **password strength** using `zxcvbn`  
-- ✅ Verifying against **Have I Been Pwned (HIBP) API** for breached passwords  
-- ✅ Comparing with **rockyou.txt** (common password list)  
-- ✅ Enforcing **custom password policy rules**  
-- ✅ Suggesting **strong & random passwords**  
+[![Live Demo. Badge with green background and text: globe emoji Live Demo Click Here. Indicates a live demonstration is available for the AwareLock cybersecurity platform. The badge has a bright and inviting tone.](https://img.shields.io/badge/🌍%20Live%20Demo-Click%20Here-brightgreen?style=for-the-badge)](https://awarelock.onrender.com)
 
 ---
 
-## 🛠️ Tech Stack  
+## 🛡️ What is AwareLock?
+
+**AwareLock** is a cybersecurity awareness platform built with Python(Flask). It helps users:
+
+- 🔐 How strong & secure passwords
+- 🧠 Understand how phishing attacks work through a safe simulation demo
+
+---
+
+## 🔍 Features
+
+### 🔑 Password Security Tools
+- ✅ Check password strength using `zxcvbn`
+- ✅ Verify against **Have I Been Pwned (HIBP)** for breached passwords
+- ✅ Compare with **rockyou.txt** (common password list)
+- ✅ Enforce custom password policy rules
+- ✅ Generate strong, random password suggestions
+
+### 🎣 Phishing Simulation Demo
+- ✅ Try a **safe phishing demo** to learn how phishing attacks look and feel
+- ✅ Educate users on spotting suspicious links and emails
+
+---
+
+## 🛠️ Tech Stack
 
 - 🐍 Python  
 - 🌐 Flask  
 - 🎨 Bootstrap  
 - 🔑 zxcvbn  
-- 🛡️ HaveIBeenPwned API  
+- 🛡️ HIBP API  
 - 📄 HTML / CSS / JavaScript  
 
 ---
 
-## 🚀 Getting Started  
+## 🚀 Getting Started
 
-### 🔧 Installation  
+### 🔧 Installation
 
-Clone this repo and install dependencies:  
+Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/password-checker.git
-cd password-checker
+git clone https://github.com/Sayan-8910/AwareLock.git
+cd AwareLock
 pip install -r requirements.txt
 
 ▶️ Run the App
@@ -41,7 +57,7 @@ python app.py
 Now visit 👉 http://127.0.0.1:5000 in your browser.
 
 Or check the hosted version here:
-👉 password-strength-breach-checker.onrender.com
+👉 awarelock.onrender.com
 
 📸 Screenshots
 

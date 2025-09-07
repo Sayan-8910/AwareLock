@@ -27,25 +27,29 @@ body {
 }
 
 input {
-    width: 90%;
-    padding: 10px;
+    width: 100%;              /* full width for mobile friendliness */
+    padding: 12px;            /* slightly bigger for touch screens */
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 16px;          /* better readability on mobile */
 }
 
 button {
     background: #007BFF;
     color: white;
     border: none;
-    padding: 10px;
-    width: 100%;
+    padding: 10px 30px; /* control size */
     border-radius: 6px;
     cursor: pointer;
     font-size: 15px;
     transition: background 0.3s ease-in-out;
+    
+    display: block;
+    margin: 15px auto; /* <-- centers horizontally */
+    width: fit-content; /* auto-fit size */
 }
+
 
 button:hover {
     background: #0056b3;
@@ -101,8 +105,8 @@ button:hover {
 }
 
 .home-btn {
-    display: inline-block;
-    margin-top: 18px;
+    display: block;             /* make it block so it can be centered */
+    margin: 18px auto 0;        /* centers horizontally */
     padding: 10px 20px;
     background: #007BFF;
     color: white;
@@ -110,6 +114,9 @@ button:hover {
     border-radius: 8px;
     transition: background 0.3s;
     font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+    width: 60%;      
 }
 
 .home-btn:hover {
@@ -156,6 +163,5 @@ button:hover {
 
     .home-btn {
         width: 100%;
-        text-align: center;
     }
 }

@@ -4,66 +4,32 @@
   <!-- Homepage -->
   <url>
     <loc>https://awarelock.onrender.com/</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Informational Pages -->
+<!-- Informational Pages -->
+
   <url>
-    <loc>https://awarelock.onrender.com/how-it-works</loc>
-    <lastmod>2025-09-13</lastmod>
+    <loc>https://awarelock.onrender.com/learn-reporting</loc>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Simulation Modules -->
-  <url>
-    <loc>https://awarelock.onrender.com/voucher_fake</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://awarelock.onrender.com/login_fake</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://awarelock.onrender.com/delivery_fake</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://awarelock.onrender.com/kyc_fake</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Awareness & Learning -->
   <url>
     <loc>https://awarelock.onrender.com/aware_score</loc>
-    <lastmod>2025-09-13</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- Password Safety -->
   <url>
-    <loc>https://awarelock.onrender.com/learn</loc>
-    <lastmod>2025-09-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://awarelock.onrender.com/report</loc>
-    <lastmod>2025-09-13</lastmod>
+    <loc>https://awarelock.onrender.com/password</loc>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -71,24 +37,65 @@
   <!-- Phishing Awareness -->
   <url>
     <loc>https://awarelock.onrender.com/phishing</loc>
-    <lastmod>2025-09-13</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <!-- Qr-code scam simulation-->
   <url>
-    <loc>https://awarelock.onrender.com/phishing_test</loc>
-    <lastmod>2025-09-13</lastmod>
+    <loc>https://awarelock.onrender.com/simulations/qr-scam</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- Digital Arrest Scam Simulation -->
+  <url>
+    <loc>https://awarelock.onrender.com/simulations/digital-arrest-scam</loc>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- SMS Spyware Demo -->
+  <!-- Investment Scam Awareness -->
+  <url>
+    <loc>https://awarelock.onrender.com/invest_scam</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+   <!-- SMS Spyware Demo -->
   <url>
     <loc>https://awarelock.onrender.com/sms_spyware_demo</loc>
-    <lastmod>2025-09-13</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://awarelock.onrender.com/kyc-update</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+
+    <loc>https://awarelock.onrender.com/voucher</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+
+    <loc>https://awarelock.onrender.com/login</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://awarelock.onrender.com/delivery</loc>
+    <lastmod>2025-09-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

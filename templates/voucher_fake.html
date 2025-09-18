@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voucher Scam – AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+      padding: 30px;
+      min-height: 100vh;
+    }
+
+    .modal-box, .otp-box, .spy-result, .alert-box {
+      opacity: 0;
+      display: none;
+      transform: translateY(15px);
+      transition: all 0.5s ease;
+    }
+    .visible {
+      display: block !important;
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .modal-box, .otp-box {
+      background: #ffffff;
+      padding: 22px;
+      border-radius: 14px;
+      max-width: 420px;
+      margin: 20px auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      text-align: left;
+    }
+
+    .alert-box {
+      background: #fff4e6;
+      border: 3px solid #ff5722;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+      color: #4a2c00;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 14px;
+      padding: 12px;
+      border: 1px solid #a7c8e9;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .spy-result {
+      font-size: 15px;
+      color: #fff;
+      background: #d32f2f;
+      border: 2px solid #b71c1c;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      text-align: left;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    .btn-custom {
+      border-radius: 8px;
+      font-weight: 600;
+      padding: 10px 14px;
+      transition: transform 0.2s ease;
+    }
+    .btn-custom:hover {
+      transform: scale(1.03);
+    }
+
+    h2 span {
+      animation: bounce 1.2s infinite alternate;
+      display: inline-block;
+    }
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-5px); }
+    }
+
+    /* celebration banner */
+    .celebration {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-top: 15px;
+      animation: fadeInScale 1.2s ease forwards;
+    }
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.6); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body onload="launchCelebration()">
+
+<div class="container my-5 text-center">
+  <h2 class="text-warning">
+    <span>🎁</span> Voucher Redemption Page
+  </h2>
+  <p class="lead">🎉 Congratulations! You’ve won a <b>₹10,000 shopping voucher</b> 🎉</p>
+  <div class="celebration" id="celebrationMsg">✨ Claim your prize below ✨</div>
+
+  <!-- Step 1: Mobile Number -->
+  <div class="modal-box visible" id="voucherBox">
+    <h5 class="mb-3">📱 Enter your mobile number to claim:</h5>
+    <input type="tel" id="mobileInput" placeholder="e.g. 9876543210" maxlength="10" pattern="\d{10}" required/>
+    <button id="submitMobileBtn" class="btn btn-danger w-100 mt-2 btn-custom" onclick="submitMobile()">Submit</button>
+  </div>
+
+  <!-- Step 2: OTP -->
+  <div class="otp-box" id="otpBox">
+    <h5 class="mb-3">🔐 Enter OTP sent to your number:</h5>
+    <input type="text" id="otpInput" placeholder="4-digit OTP" maxlength="4" pattern="\d{4}" required/>
+    <button id="submitOtpBtn" class="btn btn-success w-100 mt-2 btn-custom" onclick="submitOTP()">Verify</button>
+  </div>
+
+  <!-- Step 3: Spyware Trigger -->
+  <div id="spyResult" class="spy-result fw-bold mt-3" role="status" aria-live="polite"></div>
+
+  <!-- Final Warning -->
+  <div id="alertBox" class="alert-box">
+    <h4 style="margin-top:0;">⚠️ Warning:</h4>
+    <p>This is a <b>simulated scam</b>. Real voucher scams often ask for personal info and OTPs to hijack accounts.</p>
+    <ul>
+      <li>❌ Never share OTPs</li>
+      <li>❌ Avoid clicking unknown links</li>
+      <li>✅ Verify sources before trust</li>
+      <li>✅ Use official apps/websites</li>
+    </ul>
+  </div>
+
+  <div class="mt-4">
+    <a href="{{ url_for('sms_spyware_demo') }}" class="btn btn-outline-secondary">← Back to SMS Demo</a>
+  </div>
+</div>
+
+<script>
+  function launchCelebration() {
+    // run confetti burst
+    var duration = 3 * 1000;
+    var end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 }
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 }
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+
+  function submitMobile() {
+    const mobile = document.getElementById("mobileInput").value.trim();
+    if (!/^\d{10}$/.test(mobile)) {
+      alert("❌ Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    const voucherBox = document.getElementById("voucherBox");
+    voucherBox.classList.remove("visible");
+    setTimeout(() => { voucherBox.style.display = "none"; }, 500);
+
+    sessionStorage.setItem("voucher_mobile_entered", mobile);
+
+    const otpBox = document.getElementById("otpBox");
+    setTimeout(() => { otpBox.style.display = "block"; otpBox.classList.add("visible"); }, 600);
+  }
+
+  function submitOTP() {
+    const otp = document.getElementById("otpInput").value.trim();
+    if (!/^\d{3,6}$/.test(otp)) {
+      alert("❌ Please enter a valid OTP (3–6 digits).");
+      return;
+    }
+
+    const otpBox = document.getElementById("otpBox");
+    otpBox.classList.remove("visible");
+    setTimeout(() => { otpBox.style.display = "none"; }, 500);
+
+    const result = document.getElementById("spyResult");
+    result.innerHTML = "";
+    result.style.display = "";
+    result.classList.add("visible");
+
+    const lines = [
+      "🚨 Alert Triggered!",
+      "📡 OTP captured... ✅",
+      "🕵️ Personal data compromised... ⚠️",
+      "💻 Session hijacked... ⚠️",
+      "🌐 Redirecting to scam server..."
+    ];
+    let idx = 0;
+    function showNextLine() {
+      if (idx >= lines.length) {
+        setTimeout(() => {
+          const alertBox = document.getElementById("alertBox");
+          alertBox.style.display = "block";
+          alertBox.classList.add("visible");
+        }, 1200);
+        return;
+      }
+      const line = document.createElement("div");
+      line.textContent = lines[idx];
+      line.style.opacity = "0";
+      result.appendChild(line);
+      setTimeout(() => { line.style.transition = "opacity 400ms"; line.style.opacity = "1"; }, 40);
+      idx++;
+      setTimeout(showNextLine, 1500);
+    }
+    showNextLine();
+  }
+</script>
+
+</body>
+</html>

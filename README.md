@@ -6,10 +6,7 @@
 
 ## 🛡️ What is AwareLock?
 
-**AwareLock** is a cybersecurity awareness platform built with Python(Flask). It helps users:
-
-- 🔐 How strong & secure passwords
-- 🧠 Understand how phishing attacks work through a safe simulation demo
+**AwareLock** is a cybersecurity awareness platform that educates users on how real-world cyber frauds occur and provides interactive simulations to learn safe online practices. :
 
 ---
 
@@ -26,6 +23,37 @@
 - ✅ Try a **safe phishing demo** to learn how phishing attacks look and feel
 - ✅ Educate users on spotting suspicious links and emails
 
+### 📱 QR Code Scam Simulation
+
+- ✅ Learn how attackers hide malicious links in QR codes
+
+- ✅ Practice scanning in a safe training environment
+
+- ✅ Understand why you should verify QR sources before scanning
+
+### 🚔 Digital Arrest Simulation
+
+- ✅ Experience a simulated fake police/cyber cell call
+
+- ✅ Learn how fraudsters use fear & authority pressure
+
+- ✅ Understand safe actions to protect yourself
+
+### 💰 Investment Scam Simulation
+
+- ✅ Explore how fake investment platforms trick users
+
+- ✅ Learn to identify too-good-to-be-true offers
+
+- ✅ Build awareness against online fraud schemes
+
+### 📩 SMS Spyware Demo
+
+- ✅ Simulate how malicious SMS messages work
+
+- ✅ Spot suspicious shortened links & attachments
+
+- ✅ Learn safe practices to avoid spyware infection
 ---
 
 ## 🛠️ Tech Stack
@@ -38,6 +66,13 @@
 - 📄 HTML / CSS / JavaScript  
 
 ---
+### 🛡️ Legal Notice
+
+- This repository is protected under copyright law.
+
+- ✅ You may view and run the code locally for personal learning or testing.
+
+- 🚫 You cannot copy, modify, distribute, or use the code in any personal or commercial project without explicit permission.
 
 ## 🚀 Getting Started
 

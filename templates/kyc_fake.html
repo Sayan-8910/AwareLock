@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fake KYC Update – AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #d9f0ff, #f0f9ff);
+      padding: 30px;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    h2 {
+      background: linear-gradient(90deg, #dc3545, #fd7e14);
+  
+      font-weight: 700;
+    }
+    .lead {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* APK Download box */
+    .apk-box {
+      border: 2px dashed #dc3545;
+      padding: 20px;
+      border-radius: 10px;
+      background: #fff3f3;
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Spyware Result */
+    .spy-result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #b30000;
+      text-align: left;
+      display: inline-block;
+      white-space: pre-line;
+      min-height: 120px;
+    }
+
+    /* Warning Box */
+    .alert-box {
+      background: #fff4e6;
+      border: 4px solid #fa2803;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 25px;
+      color: #5a3300;
+      display: none;
+      text-align: left;
+    }
+    .alert-box h4 {
+      margin-bottom: 10px;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+    .modal-box {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: left;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      animation: slideUp 0.5s ease-in-out;
+    }
+    .modal-box h5 {
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .modal-box ul {
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    /* Buttons */
+    .btn-custom {
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+    .btn-danger {
+      font-weight: 600;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container-box">
+  <h2>⚠️ Fake KYC Update</h2>
+  <p class="lead">This is a simulated phishing page designed to steal your personal data.</p>
+
+  <!-- Modal Permission Popup -->
+  <div id="permissionModal" class="modal-overlay">
+    <div class="modal-box">
+      <h5>“KYC Update” requests access:</h5>
+      <ul>
+        <li>📇 Contacts</li>
+        <li>📷 Camera</li>
+        <li>📍 Location</li>
+      </ul>
+      <div class="text-end">
+        <button class="btn btn-primary btn-sm me-2" onclick="grantPermissions()">Allow</button>
+        <button class="btn btn-outline-secondary btn-sm" onclick="denyPermissions()">Deny</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APK Download -->
+  <div class="apk-box" id="apkBox">
+    <h5>📥 Downloading APK...</h5>
+    <p><em>kyc_update.apk</em> is being downloaded.</p>
+    <p class="text-danger">⚠️ This app may request access to sensitive data.</p>
+  </div>
+
+  <!-- Spyware Activation -->
+  <div id="spyResult" class="spy-result"></div>
+
+  <!-- Warning Box -->
+  <div id="alertBox" class="alert-box">
+    <h4>🚨 Warning:</h4>
+    <ul>
+      <li>❌ Never install unverified apps from unknown sources.</li>
+      <li>❌ Don’t allow unnecessary permissions from unknown apps.</li>
+      <li>✅ Legit organizations never ask to install apps for KYC updates.</li>
+      <li>✅ Always verify URLs and sources before proceeding.</li>
+    </ul>
+  </div>
+
+  <!-- Trigger Button -->
+   
+  <button id="installBtn" class="btn btn-danger btn-custom mt-4" onclick="simulateSpy()">Install & Activate</button>
+
+<script>
+  function simulateSpy() {
+    document.getElementById("permissionModal").style.display = "flex";
+  }
+
+  function grantPermissions() {
+    document.getElementById("permissionModal").style.display = "none";
+    document.getElementById("apkBox").style.display = "block";
+    document.getElementById("installBtn").style.display = "none"; // ✅ Corrected
+
+    // Simulate spyware behavior with typing effect
+    const result = document.getElementById("spyResult");
+    const textLines = [
+      "<h4>👁️‍🗨️ Spyware Activated!</h4>",
+      "---- Accessing contacts...⚠️ <br>",
+      "---- Reading SMS... ⚠️<br>",
+      "---- Tracking location... ⚠️<br>",
+      "---- Uploading data to remote server... ⚠️<br>"
+    ];
+
+    result.innerHTML = "";
+    let lineIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < textLines.length) {
+        result.innerHTML += textLines[lineIndex];
+        lineIndex++;
+        setTimeout(typeLine, 2000);
+      } else {
+        document.getElementById("alertBox").style.display = "block";
+      }
+    }
+    typeLine();
+  }
+
+  function denyPermissions() {
+    document.getElementById("permissionModal").style.display = "none";
+    alert("Permissions denied. App cannot proceed.");
+  }
+</script>
+
+  <div class="mt-4">
+    <a href="{{ url_for('sms_spyware_demo') }}" class="btn btn-outline-secondary">← Back to SMS Demo</a>
+  </div>
+</div>
+
+</body>
+</html>

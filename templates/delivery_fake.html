@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Delivery Update – AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+      padding: 30px;
+      min-height: 100vh;
+      margin-top: 0;
+      padding-top: 0;
+     }
+    .delivery-box, .spy-result, .alert-box {
+      opacity: 0;
+      display: none;
+      transition: opacity 1s ease-in-out;
+    }
+    .visible {
+      display: block;
+      opacity: 1;
+    }
+    .delivery-box {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .alert-box {
+      background: #fff8e1;
+      border: 1px solid #ef0400;
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 20px;
+      color: #856404;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .tips-list {
+      text-align: left;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container text-center">
+  <h2 class="text-primary mt-5">📦 Delivery Failed</h2>
+  <p class="lead">Your package could not be delivered due to an incorrect address. Please update your delivery info.</p>
+
+  <!-- Fake Courier Form -->
+  <div class="delivery-box visible" id="deliveryBox">
+    <h5 class="mb-3">Tracking ID: #IN-DEL-938472</h5>
+    <input type="text" id="nameInput" placeholder="👤 Full Name" maxlength="30" required/> 
+    <input type="tel" id="mobileInput" placeholder="📱 Mobile Number" maxlength="10" required/>
+    <input type="text" id="addressInput" placeholder="🏠 Delivery Address" maxlength="50" required/>
+    <button class="btn btn-primary w-100 mt-2" onclick="submitDelivery()">Reschedule Delivery</button>
+  </div>
+
+  <!-- Spyware Trigger -->
+  <div id="spyResult" class="spy-result fw-bold text-danger mt-3"></div>
+
+  <!-- Final Warning -->
+  <div id="alertBox" class="alert-box">
+    <h4><strong>Warning:</strong></h4>
+    <p>This is a simulated scam. Real delivery scams often ask for personal info or payment to reschedule.</p>
+    <p>Always verify the sender and never enter sensitive data on unknown links.</p>
+    <ul class="tips-list">
+  <li>❌ Never share your personal details </li>
+  <li>❌ Don't click untrusted "track your parcel" links — they may steal credentials</li>
+  <li>✅ Verify tracking numbers on the courier's official website or app</li>
+  <li>✅ Contact the sender or courier using official phone numbers listed on their site</li>
+  <li>✅ Never install unknown apps to "claim" a delivery</li>
+   </ul>
+  </div>
+
+  <div class="mt-4">
+    <a href="{{ url_for('sms_spyware_demo') }}" class="btn btn-outline-secondary">← Back to SMS Demo</a>
+  </div>
+</div>
+
+<script>
+  function submitDelivery() {
+    const name = document.getElementById("nameInput").value.trim();
+    const mobile = document.getElementById("mobileInput").value.trim();
+    const address = document.getElementById("addressInput").value.trim();
+
+    if (!name || !/^\d{10}$/.test(mobile) || !address) {
+      alert("Please enter valid name, 10-digit mobile number, and address.");
+      return;
+    }
+
+    document.getElementById("deliveryBox").classList.remove("visible");
+    document.getElementById("deliveryBox").style.display = "none";
+
+// ✅ Track user behavior
+    sessionStorage.setItem("delivery_info_submitted", true);
+
+    const result = document.getElementById("spyResult");
+    result.innerHTML = `
+      <h4>🚨 Personal Info Captured!</h4>
+      - Name: ${name}<br>
+      - Mobile: ${mobile}<br>
+      - Address: ${address}<br>
+      - Redirecting to scam server... ⚠️
+    `;
+    result.style.display = "block";
+    result.classList.add("visible");
+
+    setTimeout(() => {
+      const alertBox = document.getElementById("alertBox");
+      alertBox.style.display = "block";
+      alertBox.classList.add("visible");
+    }, 1500);
+  }
+</script>
+
+</body>
+</html>

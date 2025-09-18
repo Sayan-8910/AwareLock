@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Digital Arrest Scam Simulation – AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root{
+      --primary: #d9534f;
+      --accent: #6610f2;
+      --bg: linear-gradient(135deg,#e0f7fa,#e3f2fd);
+    }
+    html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:var(--bg);}
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    /* Page content wrapper */
+    .page {
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      padding:32px 16px;
+    }
+
+   header {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    width: 100%;
+  }
+    header h2{margin:0;font-weight:700;}
+    header p{margin:6px 0 0;color:rgba(255,255,255,0.92);}
+
+    hr {
+    border: none;
+    margin: 40px auto;
+    width: 100%;
+  }
+   footer {
+      background: #cfe9ed;
+      padding: 0.4rem;
+      border-top: 1px solid #ddd;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      margin-top: auto;
+  }
+    /* Main card (keeps existing look when call is answered/declined) */
+    .container-box{
+      width:100%;
+      max-width:760px;
+      margin:22px auto;
+      background:#fff;
+      border-radius:14px;
+      padding:26px;
+      box-shadow:0 10px 30px rgba(15,15,15,0.06);
+      text-align:center;
+    }
+
+    /* Incoming call overlay (full-screen) */
+    .incoming-overlay{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.55));
+      z-index:9999;
+      padding:24px;
+    }
+    .call-card{
+      width:100%;
+      max-width:520px;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      border-radius:18px;
+      padding:26px;
+      box-shadow: 0 18px 50px rgba(2,6,23,0.45);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .caller-avatar{
+      width:96px;height:96px;border-radius:50%;
+      display:inline-flex;align-items:center;justify-content:center;
+      font-size:36px;background:linear-gradient(135deg,#ff8a80,#ff5252);color:#fff;
+      box-shadow:0 8px 20px rgba(0,0,0,0.25);
+      margin-bottom:12px;
+    }
+    .caller-name{font-size:22px;font-weight:700;color:#222;margin-bottom:6px}
+    .caller-role{color:#b33;font-weight:600}
+    .caller-note{margin:12px 0 10px;color:#333}
+    .urgent-chip{
+      display:inline-block;padding:8px 12px;border-radius:999px;background:rgba(217,83,79,0.12);color:var(--primary);font-weight:700;margin-top:8px;
+      box-shadow:0 6px 16px rgba(217,83,79,0.06);
+    }
+
+    /* Ring animation (pulsing halo) */
+    .ring {
+      position:absolute;
+      left:50%;transform:translateX(-50%);
+      bottom: -40px;
+      width:320px;height:320px;border-radius:50%;
+      background:radial-gradient(circle at center, rgba(217,83,79,0.08), rgba(217,83,79,0.02) 60%);
+      animation: ringPulse 1.8s infinite;
+      pointer-events:none;
+    }
+    @keyframes ringPulse{
+      0%{transform:translateX(-50%) scale(.95);opacity:.9}
+      70%{transform:translateX(-50%) scale(1.12);opacity:.35}
+      100%{transform:translateX(-50%) scale(1.2);opacity:0}
+    }
+
+    /* Buttons */
+    .call-actions{display:flex;gap:18px;justify-content:center;margin-top:18px}
+    .btn-answer{
+      background:#28a745;border:none;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;
+      box-shadow:0 8px 18px rgba(40,167,69,0.18);
+    }
+    .btn-decline{
+      background:#dc3545;border:none;color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;
+      box-shadow:0 8px 18px rgba(220,53,69,0.18);
+    }
+    .btn-answer:active,.btn-decline:active{transform:translateY(1px);}
+
+    /* small helper styles */
+    .muted{color:#666}
+    .hidden{display:none!important}
+    .typing{border-right:2px solid #333;white-space:nowrap;overflow:hidden;display:inline-block;animation:typing 3s steps(30,end), blinkCaret .8s step-end infinite}
+    @keyframes typing{from{width:0} to{width:100%}}@keyframes blinkCaret{50%{border-color:transparent}}
+    /* mobile responsiveness */
+    @media (max-width:560px){
+      .call-card{padding:18px}
+      .caller-avatar{width:72px;height:72px;font-size:28px}
+      .caller-name{font-size:20px}
+    }
+     .tips-list {
+      text-align: left;
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+    .tips-list li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <header>
+    <h2>👮 Digital Arrest Simulation – AwareLock</h2>
+    <p class="lead">This teaches how scammers use fake calls to create panic. (Demo only)</p>
+  </header>
+
+  <!-- Main content card (initial fallback content) -->
+  <div id="mainCard" class="container-box" aria-live="polite">
+    <h3 id="mainTitle">Awaiting incoming calls...</h3>
+    <p class="muted">When a simulated call comes in, you can Accept to continue the demo or Decline to ignore it.</p>
+    <div style="height:18px"></div>
+    <div class="d-flex justify-content-center">
+      <button id="simulateBtn" class="btn btn-outline-primary btn-custom" onclick="showIncoming(true)">Simulate Incoming Call</button>
+    </div>
+  </div>
+
+  <!-- Hidden original steps (kept so Accept flows to your step2) -->
+  <div id="step2" class="container-box hidden" aria-hidden="true">
+    <h4>👮 Digital Verification in Progress...</h4>
+    <p class="muted typing">Officer Rajesh Sharma (CBI ID: 9821) is verifying your identity...</p>
+    <p style="margin-top:20px;">⚠️ To avoid arrest, you must pay a <b>security deposit of ₹25,000</b> immediately.</p>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-warning btn-custom" onclick="submitPayment()">💳 Pay ₹25,000</button>
+    </div>
+  </div>
+
+  <div id="step3" class="container-box hidden" aria-hidden="true">
+    <h4>⚠️ Transaction Error</h4>
+    <p class="text-danger"><strong>Payment failed ❌ Server timeout occurred.</strong></p>
+    <p>⛔ You are now under <b>digital custody</b>. Do not disconnect this session.</p>
+  </div>
+
+<div id="step4" class="container-box hidden warning-box" aria-hidden="true">
+  <h4>🚨 Scam Simulation Complete</h4>
+  <p>This simulation mimicked a real scam tactic:</p>
+  <ul class="tips-list">
+    <li>❌ Fake police calls and video interrogations</li>
+    <li>❌ Threats of arrest to induce panic</li>
+    <li>❌ Demands for money to “settle” false charges</li>
+    <li>✅ Real police <b>never</b> ask money via phone</li>
+    <li>✅ Always verify caller identity & report fraud</li>
+    <li>✅ Never share personal or banking info over calls</li>
+  </ul>
+  <a href="/" class="btn btn-outline-secondary mt-3">⬅ Back to Home</a>
+</div>
+
+<style>
+  .warning-box {
+    background: #fff3cd; /* light yellow */
+    border: 2px solid #f41207; /* warning border */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #856404; /* dark warning text */
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .warning-box h4 {
+    color: #d9534f; /* red for warning title */
+    font-weight: bold;
+  }
+
+  .warning-box ul {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+
+  .warning-box li {
+    margin-bottom: 6px;
+    font-size: 16px;
+  }
+</style>
+
+
+<!-- Incoming Call Overlay -->
+<div id="incomingOverlay" class="incoming-overlay hidden" role="dialog" aria-modal="true" aria-label="Incoming call">
+  <div class="call-card" role="group" aria-labelledby="callerName">
+    <div class="caller-avatar" aria-hidden="true">👮</div>
+    <div id="callerName" class="caller-name">Cyber Crime Division</div>
+    <div class="caller-role">Urgent — Law Enforcement</div>
+    <div class="caller-note" id="callerNote">You are accused of illegal activity linked to your Aadhaar and bank account.</div>
+
+    <div class="urgent-chip" id="urgentChip">🚨 A digital arrest warrant has been issued!</div>
+
+    <div class="call-actions" style="margin-top:18px;">
+      <button id="acceptBtn" class="btn btn-answer" aria-label="Accept call">Accept</button>
+      <button id="declineBtn" class="btn btn-decline" aria-label="Decline call">Decline</button>
+    </div>
+
+    <div class="ring" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- Audio (ringtone) -->
+<audio id="ringtone" loop preload="auto">
+  <!-- short ringtone — fallback beep; you can replace with your own mp3 link -->
+  <source src="https://actions.google.com/sounds/v1/cartoon/crazy_dinner_bell.ogg" type="audio/ogg">
+  <source src="https://actions.google.com/sounds/v1/alarms/phone_alerts_and_rings.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const incomingOverlay = document.getElementById('incomingOverlay');
+  const ringtone = document.getElementById('ringtone');
+  const simulateBtn = document.getElementById('simulateBtn');
+  const mainTitle = document.getElementById('mainTitle');
+
+  // Show incoming call overlay
+  function showIncoming(simulated=false) {
+    incomingOverlay.classList.remove('hidden');
+    // visually ring; attempt to play audio (may be blocked until user interaction)
+    try {
+      ringtone.currentTime = 0;
+      ringtone.play().catch(() => {
+        // autoplay blocked — will play after user interacts (Accept/Decline)
+        // you can show a visual cue instead (we already have ring animation)
+      });
+    } catch(e) { /* ignore */ }
+
+    // vibrate pattern if supported
+    if (navigator.vibrate) {
+      try { navigator.vibrate([300,200,300]); } catch(e){/*ignore*/ }
+    }
+
+    // Update main card hint
+    mainTitle.textContent = 'Incoming call...';
+  }
+
+  // Hide incoming call overlay
+  function hideIncoming() {
+    incomingOverlay.classList.add('hidden');
+    try { ringtone.pause(); ringtone.currentTime = 0; } catch(e){}
+    if (navigator.vibrate) { try { navigator.vibrate(0); } catch(e){} }
+    mainTitle.textContent = 'Awaiting incoming calls...';
+  }
+
+  // Accept handler -> go to step2 (interrogation)
+  document.getElementById('acceptBtn').addEventListener('click', () => {
+    hideIncoming();
+    // show step2
+    document.getElementById('mainCard').classList.add('hidden');
+    const s2 = document.getElementById('step2');
+    s2.classList.remove('hidden'); s2.setAttribute('aria-hidden','false');
+    // stop ringing definitely
+    try{ ringtone.pause(); }catch(e){}
+  });
+
+  // Decline handler -> hide overlay and show safe info
+  document.getElementById('declineBtn').addEventListener('click', () => {
+    hideIncoming();
+    // show a short safe message in main card
+    const main = document.getElementById('mainCard');
+    main.classList.remove('hidden');
+    mainTitle.textContent = 'Call declined — stay cautious.';
+    // show educational tip
+    const tip = document.createElement('p');
+    tip.className = 'muted';
+    tip.textContent = 'Tip: Real law enforcement will not call and ask for money. Report suspicious callers.';
+    // remove previous tip if any
+    const existing = main.querySelector('.muted.tip');
+    if (existing) existing.remove();
+    tip.classList.add('tip');
+    main.appendChild(tip);
+  });
+
+  // Optional: auto-show incoming after a short delay (simulate incoming)
+  // comment out if you prefer manual "Simulate Incoming Call" button
+  window.addEventListener('load', () => {
+    // show incoming automatically after 1.2s
+    setTimeout(() => { showIncoming(true); }, 1200);
+  });
+
+  // Payment flow from earlier code (keeps behavior)
+  function submitPayment() {
+    // Hide step2, show step3 then step4 as before
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step3').classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('step3').classList.add('hidden');
+      document.getElementById('step4').classList.remove('hidden');
+    }, 4000);
+  }
+</script>
+</body>
+<hr class="mt-5" />
+<footer class="text-center" style="font-size: 0.9rem; color: #333;">
+
+  <p>
+    Created by <strong>Sayan Mondal</strong>  
+    | <a href="https://github.com/Sayan-8910" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-github"></i> GitHub</a> 
+    | <a href="https://www.linkedin.com/in/sayan-mondal-386a31294" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-linkedin"></i> LinkedIn</a>
+    | <a href="mailto:sm384008@gmail.com" style="color:#4da6ff;">
+      <i class="bi bi-envelope-fill"></i> Email</a>
+  </p>
+
+  <p>&copy; 2025 AwareLock by Sayan Mondal. All Rights Reserved.</p>
+</footer>
+</html>

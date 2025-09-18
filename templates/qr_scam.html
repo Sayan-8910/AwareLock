@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OLX Seller Scam Simulation - AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+  body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #d9f0ff, #f0f9ff);
+      padding: 30px;
+      min-height: 100vh;
+      margin: 0;
+      
+  }
+  header {
+    background: linear-gradient(135deg, #0d6efd, #6610f2);
+    color: white;
+    padding: 25px 15px;
+    text-align: center;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  header h2 {
+    font-weight: 700;
+  }
+  hr {
+    border: none;
+    margin: 40px auto;
+    width: 100%;
+  }
+   footer {
+      background: #cfe9ed;
+      padding: 0.3rem;
+      border-top: 1px solid #ddd;
+      bottom: 0;
+      width: 100%;
+  }
+  .container-box {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease-in-out;
+  }
+  .section {
+      margin-bottom: 30px;
+  }
+
+  /* Progress bar */
+  .progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 30px;
+    list-style: none;
+    padding: 0;
+  }
+  .progress-steps li {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+  }
+  .progress-steps li.active {
+    color: #0d6efd;
+    font-weight: 600;
+  }
+  .progress-steps li::before {
+    content: "●";
+    display: block;
+    font-size: 22px;
+    margin: auto;
+    margin-bottom: 5px;
+    color: currentColor;
+  }
+  .progress-steps li::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background: #ccc;
+    z-index: -1;
+  }
+  .progress-steps li:last-child::after {
+    display: none;
+  }
+
+  /* SMS styles */
+  .sms-feed {
+      background-color: #f9fbfd;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+      display: none;
+  }
+  .sms-message {
+      background-color: #e9f5ff;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.2s;
+  }
+  .sms-message:hover {
+      background-color: #d9ecff;
+      transform: scale(1.02);
+  }
+  .sms-action {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      animation: fadeIn 0.5s ease-in-out;
+  }
+  .sms-action img {
+      width: 200px;
+      height: 200px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .sms-action button {
+      padding: 10px 18px;
+      background-color: #198754;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+  }
+  .sms-action button:hover {
+      background-color: #157347;
+  }
+
+  /* UPI PIN */
+  .upi-pin-box {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+  }
+  .upi-pin-box input {
+      padding: 10px;
+      font-size: 18px;
+      width: 180px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 12px;
+  }
+
+  /* Alert box */
+  .alert-box {
+      text-align: center;
+      display: none;
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 12px;
+      background: #fff3cd;
+      border: 2px solid red;
+      color: #b30000;
+      font-size: 16px;
+  }
+  .tips-list {
+      text-align: left;
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+    .tips-list li {
+      margin-bottom: 8px;
+    }
+
+  </style>
+</head>
+<body>
+<header>
+  <h2>▦ QR Code Scam Simulation – AwareLock</h2>
+  <p class="lead"><b>Learn how scammers trick sellers into sending money.</b></p>
+</header>
+
+<div class="container-box">
+  <!-- Progress Indicator -->
+  <ul class="progress-steps">
+    <li class="active">Select Item</li>
+    <li>Buyer Contact</li>
+    <li>Fake Payment</li>
+    <li>Scam Alert</li>
+  </ul>
+
+  <!-- Step 1: Product Selection -->
+  <div class="section" id="sellerSection">
+    <h4>🛒 What are you selling?</h4>
+    <select id="productSelect" class="form-select">
+      <option value="" disabled selected>Select a product</option>
+      <option value="Mobile Phone">Mobile Phone</option>
+      <option value="Bike">Bike</option>
+      <option value="Laptop">Laptop</option>
+      <option value="Furniture">Furniture</option>
+    </select>
+    <div class="d-flex justify-content-center mt-3">
+      <button class="btn btn-primary" onclick="startSimulation()">Sell</button>
+    </div>
+  </div>
+
+  <!-- Step 2: SMS Feed -->
+  <div class="sms-feed" id="smsFeed" role="list"></div>
+
+  <!-- Step 3: UPI PIN Prompt -->
+  <div class="upi-pin-box" id="upiPinBox">
+    <h5>🔐 Enter your UPI PIN to receive payment</h5>
+    <input type="password" id="upiPinInput" placeholder="••••" maxlength="4" pattern="\d{4}" required>
+    <br>
+    <button class="btn btn-danger mt-2" onclick="validateUPIPin()">Submit PIN</button>
+  </div>
+
+  <!-- Step 4: Scam Alert -->
+  <div id="alertBox" class="alert-box">
+     <h4>🚨 Scam Simulation Complete</h4>
+     <p>This simulation mimicked a real scam tactic:</p>
+     <ul class="tips-list">
+       <li>❌ QR code scams to steal money</li>
+       <li>❌ Fake buyer identities to gain trust</li>
+       <li>❌ Pressure tactics to rush decisions</li>
+       <li>✅ Never trust unsolicited requests for payment</li>
+       <li>✅ Receiving money via UPI never requires your PIN</li>
+       <li>✅ Always verify buyer identity and payment before handing over goods</li>
+     </ul>
+     <div style="text-align: center;">
+       <a href="/" class="btn btn-outline-secondary mt-3">⬅ Back to Home</a>
+     </div>
+  </div>
+</div>
+<script>
+  const buyerNames = ["Rahul Sharma","Priya Verma","Major Singh","Ramesh Patel","Sneha Joshi","Amit Desai"];
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function startSimulation() {
+    const product = document.getElementById("productSelect").value;
+    if (!product) return alert("Please select a product to sell.");
+    document.getElementById("sellerSection").style.display = "none";
+
+    const shuffledNames = shuffle(buyerNames);
+    const selectedName = shuffledNames[0];
+
+    setTimeout(() => { showBuyerMessage(product, selectedName); }, 1500);
+  }
+
+  function showBuyerMessage(product, buyerName) {
+    document.querySelector(".progress-steps li:nth-child(2)").classList.add("active");
+
+    const feed = document.getElementById("smsFeed");
+    feed.style.display = "block";
+
+    const div = document.createElement("div");
+    div.className = "sms-message";
+    div.innerHTML = `👤 ${buyerName} is interested in your <strong>${product}</strong>. Click to view message.`;
+
+    const actionDiv = document.createElement("div");
+    actionDiv.className = "sms-action";
+    actionDiv.id = "actionQR";
+    actionDiv.innerHTML = `
+      <p>Hi! I’m really interested in your <strong>${product}</strong>. I’m sending ₹5000 as advance via UPI.<br>
+      Please scan the QR code below to receive the payment.</p>
+      <img src="https://i.pinimg.com/1200x/7e/96/2c/7e962c5840117482f6bd04438157c513.jpg" alt="QR Code">
+      <br>
+      <button onclick="showUPIPin()">Scan & Receive ₹5000</button>
+    `;
+
+    div.onclick = () => { actionDiv.style.display = "block"; document.querySelector(".progress-steps li:nth-child(3)").classList.add("active"); };
+
+    feed.appendChild(div);
+    feed.appendChild(actionDiv);
+  }
+
+  function showUPIPin() {
+    document.getElementById("smsFeed").style.display = "none";
+    document.getElementById("upiPinBox").style.display = "block";
+  }
+
+  function validateUPIPin() {
+    const pin = document.getElementById("upiPinInput").value;
+    if (!/^\d{4}$/.test(pin)) {
+      alert("Please enter exactly 4 numeric digits.");
+      return;
+    }
+    setTimeout(() => {
+      document.getElementById("upiPinBox").style.display = "none";
+      document.getElementById("alertBox").style.display = "block";
+      document.querySelector(".progress-steps li:nth-child(4)").classList.add("active");
+    }, 1000);
+  }
+</script>
+
+<hr class="mt-5" />
+<footer class="text-center" style="font-size: 0.9rem; color: #333;">
+
+  <p>
+    Created by <strong>Sayan Mondal</strong>  
+    | <a href="https://github.com/Sayan-8910" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-github"></i> GitHub</a> 
+    | <a href="https://www.linkedin.com/in/sayan-mondal-386a31294" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-linkedin"></i> LinkedIn</a>
+    | <a href="mailto:sm384008@gmail.com" style="color:#4da6ff;">
+      <i class="bi bi-envelope-fill"></i> Email</a>
+  </p>
+
+  <p>&copy; 2025 AwareLock by Sayan Mondal. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

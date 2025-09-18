@@ -1,13 +1,10 @@
-from flask import Flask, request, render_template
-from flask import send_from_directory
+from flask import Flask, request, render_template, send_from_directory
 from zxcvbn import zxcvbn
 import hashlib
 import requests
 import re
 import random
-import string
 import os
-import requests
 
 app = Flask(__name__)
 
@@ -49,43 +46,35 @@ def validate_password_policy(password):
     }
 
 def generate_strong_password():
-    # Word lists for phrase
     adjectives = ["Blue", "Smart", "Fast", "Silent", "Happy", "Brave", "Clever", "Mighty", "Fierce", "Crazy"]
     nouns = ["Tiger", "Panda", "Dragon", "Eagle", "Shark", "Lion", "Wolf", "Falcon", "Bear", "Cheetah"]
     verbs = ["Runs", "Jumps", "Flies", "Climbs", "Fights", "Wins", "Rises", "Roars", "Dances", "Shines"]
 
-    # Generate phrase
     phrase = random.choice(adjectives) + random.choice(nouns) + random.choice(verbs)
-
-    # Add requirements
     digits = "".join(random.choices("0123456789", k=2))
     specials = "".join(random.sample("!@#$%^&*+-/", 3))
+    return phrase + digits + specials
 
-    # Final password (no extra randomness)
-    password = phrase + digits + specials 
-    return password
+# -------------------- Core Routes --------------------
 
-# -------------------- Routes --------------------
+@app.route("/")
+def home():
+    return render_template("index.html")
 
-@app.route("/", methods=["GET", "POST"])
-def check_password():
+@app.route("/password", methods=["GET", "POST"])
+def password_page():
     if request.method == "POST":
         pwd = request.form["pwd"]
         strength = zxcvbn(pwd)
         breach_status = check_pwned(pwd)
         common_status = check_common_password(pwd)
 
-        # Extract entropy & crack-time details
         guesses = strength["guesses"]
         crack_times_display = strength["crack_times_display"]
         crack_times_seconds = strength["crack_times_seconds"]
 
-        # Apply policy checks
         policy_results = validate_password_policy(pwd)
-        feedback_lines = []
-        for rule, passed in policy_results.items():
-            symbol = "✅" if passed else "❌"
-            feedback_lines.append(f"{symbol} {rule}")
+        feedback_lines = [("✅" if passed else "❌") + " " + rule for rule, passed in policy_results.items()]
         policy_feedback = "\n".join(feedback_lines)
 
         suggested_password = None
@@ -93,7 +82,7 @@ def check_password():
             suggested_password = generate_strong_password()
 
         return render_template(
-            "index.html",
+            "password.html",
             strength=strength,
             breach_status=breach_status,
             common_status=common_status,
@@ -103,47 +92,84 @@ def check_password():
             crack_times_display=crack_times_display,
             crack_times_seconds=crack_times_seconds
         )
-    return render_template("index.html")
-
+    return render_template("password.html")
 
 @app.route("/suggest")
 def suggest_password():
     return generate_strong_password()
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# -------------------- Awareness Modules --------------------
 
-# 🔐 Fake phishing page
+@app.route("/simulations")
+def simulations():
+    return render_template("simulations.html")
+
+@app.route("/simulations/qr-scam")
+def qr_scam_demo():
+    return render_template("qr_scam.html")
+
+@app.route("/simulations/invest-scam")
+def invest_scam_demo():
+    return render_template("invest_scam.html")
+
+@app.route("/simulations/digital-arrest-scam")
+def digital_arrest_scam_demo():
+    return render_template("digital_arscam.html")
+@app.route("/learn-reporting")
+def learn_reporting():
+    return render_template("learn&report.html")
+
+@app.route("/aware_score")
+def aware_score():
+    return render_template("aware_score.html")
+
+@app.route("/simulations/sms")
+def sms_spyware_demo():
+    return render_template("sms_spyware.html")
+
+@app.route("/kyc-update")
+def kyc_fake_page():
+    return render_template("kyc_fake.html")
+
+@app.route("/voucher")
+def voucher_fake_page():
+    return render_template("voucher_fake.html")
+
+@app.route("/login")
+def login_fake_page():
+    return render_template("login_fake.html")
+
+@app.route("/delivery")
+def delivery_fake_page():
+    return render_template("delivery_fake.html")
+
+
+@app.route("/score")
+def score():
+    return render_template("score.html")
+
+@app.route("/resources")
+def resources():
+    return render_template("resources.html")
+
 @app.route("/phishing")
 def phishing():
     return render_template("phishing.html")
 
-# 🔐 Handle fake login attempt
-@app.route("/phishing_test", methods=["POST"])
-def phishing_test():
-    username = request.form.get("username")
-    # ⚠️ We never save the password, just simulate
-    return render_template("phishing_result.html", username=username)
 
-@app.route("/how-it-works")
-def how_it_works():
-    return render_template("how_it_works.html")
+# -------------------- Verification & SEO --------------------
 
 @app.route('/googlef24112691c94f445.html')
 def serve_google_verification():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html') 
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'googlef24112691c94f445.html')
 
-@app.route('/sitemap.xml')  
-def sitemap():  
-    return send_from_directory(
-        os.path.join(app.root_path, 'static'),  # The folder where sitemap.xml is stored
-        'sitemap.xml'  # The file name
-    )
-
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
 # -------------------- Main Entry --------------------
 
 if __name__ == "__main__":
+    app.debug = True  # Optional: enable debug mode for development
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

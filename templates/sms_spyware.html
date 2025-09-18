@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SMS Spyware Demo – AwareLock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='sms.css') }}" />
+  <style>
+   body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #e3f2fd);
+      padding: 30px;
+      min-height: 100vh;
+      margin-top: 0;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+     }
+    header {
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: white;
+      padding: 25px 15px;
+      text-align: center;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    hr {
+    border: none;
+    margin: 40px auto;
+    width: 100%;
+  }
+   footer {
+      background: #cfe9ed;
+      padding: 0.4rem;
+      border-top: 1px solid #ddd;
+      position: sticky;
+      bottom: 0;
+      width: 100%;
+      margin-top: auto;
+  }
+    .sms-feed {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .sms-message {
+      background: #f8f9fa;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: none;
+      animation: slideIn 0.5s ease forwards;
+    }
+    .sms-message:hover {
+      background: #e9ecef;
+    }
+    .sms-content {
+      display: none;
+      margin-top: 8px;
+      font-size: 0.95rem;
+    }
+    .sms-content a {
+      color: #dc3545;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .sms-content a:hover {
+      color: #a71d2a;
+    }
+    @keyframes slideIn {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="text-center my-4">
+  <h2>📱 SMS Spyware Simulation – AwareLock</h2>
+  <p class="lead"><b>Messages from unknown senders will appear below. Tap to reveal content.</b></p>
+</header>
+
+<div class="sms-feed" id="smsFeed" role="list">
+  <!-- Messages will be injected here -->
+</div>
+
+<div class="text-center mt-4">
+  <a href="/" class="btn btn-outline-secondary">← Back to Home</a>
+</div>
+
+<!-- Notification sound -->
+<audio id="msgSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg" preload="auto"></audio>
+
+<script>
+  const messages = [
+    {
+      title: "🔔 Bank Alert: KYC Verification Required",
+      content: `Your KYC is pending. Click here to verify: <a href="{{ url_for('kyc_fake_page') }}">http://kyc-update.com</a>`
+    },
+    {
+      title: "🎁 You’ve won a ₹10,000 voucher!",
+      content: `Claim now: <a href="{{ url_for('voucher_fake_page') }}">http://gift-redeem.in</a>`
+    },
+    {
+       title: "🛡️ Security Notice: Unusual login detected",
+       content: `We noticed a login attempt from a new device. If this wasn't you, secure your account immediately: <a href="{{ url_for('login_fake_page') }}">http://secure-check.in/session-alert</a>`
+    },
+    {
+       title: "📦 Delivery Failed: Address not found",
+       content: `Your package could not be delivered due to incomplete address details. Please update your delivery info within 12 hours to avoid return: <a href="{{ url_for('delivery_fake_page') }}">http://track-delivery.in/update</a>`
+    }
+  ];
+
+  function toggleMessage(id) {
+    const el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+  }
+
+  function dropMessages() {
+    const feed = document.getElementById("smsFeed");
+    const sound = document.getElementById("msgSound");
+    messages.forEach((msg, index) => {
+      setTimeout(() => {
+        const div = document.createElement("div");
+        div.className = "sms-message";
+        div.setAttribute("role", "listitem");
+        div.setAttribute("tabindex", "0");
+        div.innerHTML = `
+          ${msg.title}
+          <div id="msg${index}" class="sms-content">${msg.content}</div>
+        `;
+        div.onclick = () => toggleMessage(`msg${index}`);
+        div.onkeypress = (e) => {
+          if (e.key === "Enter") toggleMessage(`msg${index}`);
+        };
+        feed.appendChild(div);
+        div.style.display = "block";
+
+        // Play message sound
+        sound.currentTime = 0;
+        sound.play();
+      }, index * 1500);
+    });
+  }
+
+  window.onload = dropMessages;
+</script>
+
+<hr class="mt-5" />
+<footer class="text-center" style="font-size: 0.9rem; color: #333;">
+
+  <p>
+    Created by <strong>Sayan Mondal</strong>  
+    | <a href="https://github.com/Sayan-8910" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-github"></i> GitHub</a> 
+    | <a href="https://www.linkedin.com/in/sayan-mondal-386a31294" target="_blank" style="color:#4da6ff;">
+      <i class="bi bi-linkedin"></i> LinkedIn</a>
+    | <a href="mailto:sm384008@gmail.com" style="color:#4da6ff;">
+      <i class="bi bi-envelope-fill"></i> Email</a>
+  </p>
+
+  <p>&copy; 2025 AwareLock by Sayan Mondal. All Rights Reserved.</p>
+</footer>
+</body>
+</html>

@@ -167,6 +167,10 @@ def serve_google_verification():
 def sitemap():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
 
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
 # -------------------- Main Entry --------------------
 
 if __name__ == "__main__":
